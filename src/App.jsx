@@ -6,6 +6,7 @@ import Loading from "./Loading/loading";
 import axios from "./axios";
 import FastFoodList from "./FastFoodList/fastFoodList";
 import SearchBar from "./SearchBar/searchBar";
+import notFound from "./assets/images/404.png";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -39,9 +40,20 @@ function App() {
 
   const renderContent = () => {
     if (loading) return <Loading theme={"dark"}></Loading>;
-    else return <FastFoodList fastFoodItems={fastFoodItems}></FastFoodList>;
-  };
 
+    if (fastFoodItems.length === 0) {
+      return (
+        <>
+          <div className="alert alert-warning text-center">
+            برای کلید واژه فوق، آیتمی یافت نشد
+          </div>
+          <img className="mx-auto mt-5 d-block" src={notFound} />
+        </>
+      );
+    }
+
+    return <FastFoodList fastFoodItems={fastFoodItems}></FastFoodList>;
+  };
   return (
     <div className="wrapper bg-faded-dark">
       <Header></Header>

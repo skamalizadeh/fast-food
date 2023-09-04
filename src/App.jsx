@@ -11,9 +11,10 @@ function App() {
   const [fastFoodItems, setFastFoodItems] = useState([]);
 
   const fetchData = async (categoryID = null) => {
+    console.log("categoryID=", categoryID);
     setLoading(true);
     const response = await axios.get(
-      `/FastFood/List/${categoryID ? "categoryID=" + categoryID : ""}`
+      `/FastFood/List/${categoryID ? "?categoryID=" + categoryID : ""}`
     );
     setLoading(false);
     setFastFoodItems(response.data);
@@ -23,6 +24,10 @@ function App() {
     fetchData();
   }, []);
 
+  const filterItems = (categoryID) => {
+    fetchData(categoryID);
+  };
+
   const renderContent = () => {
     if (loading) return <Loading theme={"dark"}></Loading>;
     else return <FastFoodList fastFoodItems={fastFoodItems}></FastFoodList>;
@@ -31,7 +36,7 @@ function App() {
   return (
     <div className="wrapper bg-faded-dark">
       <Header></Header>
-      <CategoryList></CategoryList>
+      <CategoryList filterItems={filterItems}></CategoryList>
       <div className="container mt-4">{renderContent()}</div>
     </div>
   );

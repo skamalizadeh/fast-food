@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Loading from "./Loading/loading";
 import axios from "./axios";
 import FastFoodList from "./FastFoodList/fastFoodList";
+import SearchBar from "./SearchBar/searchBar";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -44,10 +45,9 @@ function App() {
   return (
     <div className="wrapper bg-faded-dark">
       <Header></Header>
-      <CategoryList
-        filterItems={filterItems}
-        searchItem={searchItem}
-      ></CategoryList>
+      <CategoryList filterItems={filterItems}>
+        <SearchBar searchItem={searchItem} />
+      </CategoryList>
       <div className="container mt-4">{renderContent()}</div>
     </div>
   );

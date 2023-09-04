@@ -3,7 +3,7 @@ import axios from "../axios";
 import Loading from "../Loading/loading";
 import SearchBar from "../SearchBar/searchBar";
 
-const CategoryList = ({ filterItems, searchItem }) => {
+const CategoryList = ({ filterItems, children }) => {
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   useEffect(() => {
@@ -39,7 +39,7 @@ const CategoryList = ({ filterItems, searchItem }) => {
               </li>
             ))}
           </ul>
-          <SearchBar searchItem={searchItem}></SearchBar>
+          {children}
         </div>
       );
   };

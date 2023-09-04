@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { BsSearch } from "react-icons/bs";
-const SearchBar = () => {
+const SearchBar = ({ searchItem }) => {
   const [value, setValue] = useState("");
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(value);
+    searchItem(value);
   };
   return (
     <form
